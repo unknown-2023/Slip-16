@@ -1,0 +1,182 @@
+Activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+<TableRow>
+<EditText
+android:id="@+id/name"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:hint="Name" />
+</TableRow>
+<TableRow>
+<EditText
+android:id="@+id/msg"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:hint="Massage" />
+</TableRow>
+<TableRow>
+<TextView
+android:id="@+id/con"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Concatinate display here" />
+
+</TableRow>
+<TableRow>
+<RadioButton
+android:id="@+id/font"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Font"/>
+</TableRow>
+<TableRow>
+<RadioButton
+android:id="@+id/style"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Style"/>
+</TableRow>
+<TableRow>
+<CheckBox
+android:id="@+id/bold"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Bold"/>
+</TableRow>
+<TableRow>
+<CheckBox
+android:id="@+id/italic"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Italic"/>
+</TableRow>
+<TableRow>
+<CheckBox
+android:id="@+id/underline"
+
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Underline"/>
+</TableRow>
+<TableRow>
+<RadioButton
+android:id="@+id/color"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Change Color"/>
+</TableRow>
+<TableRow>
+<Button
+android:id="@+id/display"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Display" />
+</TableRow>
+<TableRow>
+<Button
+android:id="@+id/clear"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Clear" />
+</TableRow>
+<TableRow>
+<Button
+android:id="@+id/exit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Exit" />
+</TableRow>
+</TableLayout>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MainActivity.java
+
+package com.example.myconcatinate;
+import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+    EditText name,msg;
+    TextView con;
+    Button display,clear,exit;
+    RadioButton font,style,color;
+    CheckBox bold,italic,underline;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        name=(EditText) findViewById(R.id.name);
+        msg=(EditText) findViewById(R.id.msg);
+        con=(TextView) findViewById(R.id.con);
+        display = (Button) findViewById(R.id.display);
+        clear = (Button) findViewById(R.id.clear);
+        exit = (Button) findViewById(R.id.exit);
+        font = (RadioButton) findViewById(R.id.font);
+        style = (RadioButton) findViewById(R.id.style);
+
+        color = (RadioButton) findViewById(R.id.color);
+        bold = (CheckBox) findViewById(R.id.bold);
+        italic = (CheckBox) findViewById(R.id.italic);
+        underline = (CheckBox) findViewById(R.id.underline);
+        display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String c=name.getText().toString()+" "+msg.getText().toString();
+                con.setText(c);
+                con.setTypeface(null, Typeface.BOLD);
+                con.setTextSize(20);
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name.setText(" ");
+                msg.setText(" ");
+            }
+        });
+        italic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                con.setTypeface(null, Typeface.ITALIC);
+            }
+        });
+        bold.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                con.setTypeface(null, Typeface.BOLD);
+            }
+        });
+        underline.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                con.setPaintFlags(con.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                con.setTextColor(Color.CYAN);
+            }
+        });
+    }
+}
